@@ -1,68 +1,75 @@
-<template>
-  <section class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        pacin.dev
-      </h1>
-      <h2 class="subtitle">
-        PAC Offical Website
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >Documentation</a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >GitHub</a>
+<template xmlns:v-swiper="http://www.w3.org/1999/xhtml">
+  <div id="root">
+    <div id="header">
+      <div class="hcontainer">
+        <img
+          src="https://i.loli.net/2019/03/15/5c8bae8aa5b71.png"
+          style="height: 55px;"
+        />
       </div>
     </div>
-  </section>
+    <div id="swiper">
+      <div v-swiper:mySwiper="swiperOption">
+        <div class="swiper-wrapper">
+          <div v-for="banner in banners" :key="banner" class="swiper-slide">
+            <img :src="banner" style="max-height:100%; max-width:100%;" />
+          </div>
+        </div>
+        <div slot="pagination" class="swiper-pagination"></div>
+        <div slot="button-prev" class="swiper-button-prev"></div>
+        <div slot="button-next" class="swiper-button-next"></div>
+      </div>
+    </div>
+    <div id="content"></div>
+  </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-
+/* eslint-disable */
+import '../assets/index.css'
 export default {
-  components: {
-    Logo
+  data() {
+    return {
+      banners: ['https://i.loli.net/2019/03/15/5c8bab7f7fe1f.jpg', 'https://i.loli.net/2019/03/15/5c8bab7f971db.jpg',
+        'https://i.loli.net/2019/03/15/5c8bab7fd6daa.jpg'],
+      swiperOption: {
+        loop: true,
+        slidesPerView: 'auto',
+        centeredSlides: true,
+        spaceBetween: 20,
+        pagination: {
+          el: '.swiper-pagination',
+          type: 'progressbar'
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        }
+      }
+    }
+  },
+  mounted() {
   }
 }
 </script>
 
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
+<style lang="scss" scoped>
+.my-swiper {
+  height: 300px;
+  width: 100%;
+  .swiper-slide {
+    text-align: center;
+    font-size: 38px;
+    font-weight: 700;
+    background-color: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .swiper-pagination {
+    > .swiper-pagination-bullet {
+      background-color: red;
+    }
+  }
 }
 </style>
